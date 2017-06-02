@@ -62,6 +62,7 @@ public class NormalDistributionController extends HttpServlet {
 			String graphInBytes = service.plotScatter(d);
 			PrintWriter out = response.getWriter();
 			out.println(graphInBytes);
+			out.flush();
 		} catch (NormalDistributionException e) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
 		}
