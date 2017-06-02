@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>RPLOT</title>
+</head>
+<body style="background-color: white;">
+	<form action="NormalDistribution" method="post"
+		name="NormalDistribution">
+		<h3>NORMAL DISTRIBUTION </h3>
+		<div style="text-align: left;">
+			
+			<table style="width: 50%">
+				<tr>
+					<td><label>Number of samples :</label></td>
+					<td><input id="samples" type="number" required ><br>
+					<br></td>
+				</tr>
+				<tr>
+					<td><label>Mean :</label></td>
+					<td><input id="mean" type="number"  ><br>
+					<br></td>
+				</tr>
+				<tr>
+					<td><label>Variance :</label></td>
+					<td><input id="variance" type="number" ><br>
+					<br></td>
+				</tr>
+				<tr>
+					<td><input type="button" onclick="loadDoc()" value="Submit"/></td>
+					<td><input type="reset" onclick="ClrDoc()"value="Reset"/></td>
+				</tr>
+			</table>
+		</div>
+		<script type="application/javascript">
+		
+		
+function loadDoc() {
+	var m=document.getElementById("mean").value ;
+    var n=document.getElementById("variance").value;
+    //console.log(m);
+	if(m=="")
+		m=0.0;
+	if(n=="")
+	n=1.0;
+	
+	   var xhttp = new XMLHttpRequest();
+	  //var formdata = new FormData();
+      var s =document.getElementById("samples").value;
+      //var m=document.getElementById("mean").value ;
+      //var n=document.getElementById("variance").value;
+      var formdata= "samples="+s+"&mean="+m+"&variance="+n;
+  //formdata.append("samples",document.getElementById("samples").value);
+  //formdata.append("mean",document.getElementById("mean").value);
+  //formdata.append("variance",document.getElementById("variance").value);
+      console.log(formdata);
+      xhttp.onreadystatechange = function() {
+	    if (xhttp.readyState == 4 && xhttp.status == 200) {
+	     // document.getElementById("demo").innerHTML = this.responseText;
+	    document.getElementById("demo").src = this.responseText;
+	      //alert(this.responseText);
+	    console.log(this.responseText);
+	    }
+	  };
+	  xhttp.open("POST", "/StatisticalApplication/NormalDistribution", true);
+	  //alert("open");
+	  xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	  xhttp.send(formdata);
+	 // alert("Sent");
+	}
+	function ClrDoc()
+ 	  {
+		//document.getElementById('NormalDistribution').reset();
+		//document.getElementById("demo").src= "#";
+		//document.getElementById('tst').removeAttribute('src');
+		window.location.reload();
+    	}
+		</script>
+		<div style="text-align:center;">
+<img id="demo">
+    	
+		</div>
+	</form>
+	
+</body>
+</html>
